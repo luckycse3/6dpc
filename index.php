@@ -28,15 +28,14 @@ $passrange=json_decode(curl_exec($ch));
 $pass=$passrange[0]->pass;
 $status=$passrange[0]->status;
 $uprid=$passrange[0]->uprid;
-
-if($found=="0"){
 $uprapiarr=array("u622026-4b534028f842276b90728b00","u622093-5c0d428157454b6f0b3fb7e5","u622096-7c27398a03d2188e47dcc1f3","u622099-eb69cef888ed080af10c02f2","u622102-0e3573d4894a8bd47d4c7cf8","u622106-f554ade0a2e97b7b9103330e","u622110-038c187f61f038f4bbfd48e3","u622111-6a3732808f58e955800b6c29","u622112-c34dbeb3ffd13aad3112bb43","u622113-e8ae3ef8ac39386abea8757c","u622115-dd5e650c64f3408a8c45d8e4","u622116-515b65898b5da657956403c3","u622120-46756aa1ae59d3be151f1bc8","u622121-b67c029ed789f9c76bca8b8a","u622123-398a316ddcd9971a21e30093","u622125-f81028625876a502508dbf80","u622126-297fab6d76f7759e32af581c","u622127-fc2d359d99ac9fff0e29e599","u622129-fc323cd742b2deac3a8e12f4","u622130-2c6eaf88930c56ab5361e361");
 $uprapi=$uprapiarr[(($_GET['id']-1)%20)];
 $sitearr=array("luckycse00","luckycse02","luckycse03","luckycse04","luckycse05","luckycse06","luckycse07","luckycse08","luckycse09","luckycse10","luckycse11","luckycse12","luckycse13","luckycse14","luckycse15","luckycse16","luckycse17","luckycse18","luckycse19","luckycse20");
 $site=$sitearr[(($_GET['id']-1)%20)];
 
+if($found=="0"){
+
 if($status=="0"){
- 
 if($_GET['id']=="1"){
 $curl = curl_init();
 curl_setopt_array($curl, array(
@@ -113,7 +112,7 @@ if(sprintf("%06d",($pass+10))>($_GET['id']*1000)){
 $curl = curl_init();
 curl_setopt_array($curl, array(
   CURLOPT_URL => "https://api.uptimerobot.com/v2/deleteMonitor",CURLOPT_RETURNTRANSFER => true,CURLOPT_ENCODING => "",CURLOPT_MAXREDIRS => 10,CURLOPT_TIMEOUT => 30,CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,CURLOPT_CUSTOMREQUEST => "POST",
-  CURLOPT_POSTFIELDS => "api_key=$uprapi&format=json&id=".$uprid,
+  CURLOPT_POSTFIELDS => "api_key=$uprapi&format=json&id=".$uprid."&type=1&url=https%3A%2F%2F".$site.".herokuapp.com%2Findex.php%3Fid=".($_GET['id']+0)."&friendly_name=id".($_GET['id']+0),
   CURLOPT_HTTPHEADER => array("cache-control: no-cache","content-type: application/x-www-form-urlencoded"),
 ));
 $response = curl_exec($curl);$err = curl_error($curl);curl_close($curl);
@@ -143,7 +142,7 @@ echo curl_exec($ch);
 $curl = curl_init(); 
 curl_setopt_array($curl, array(
   CURLOPT_URL => "https://api.uptimerobot.com/v2/deleteMonitor",CURLOPT_RETURNTRANSFER => true,CURLOPT_ENCODING => "",CURLOPT_MAXREDIRS => 10,CURLOPT_TIMEOUT => 30,CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,CURLOPT_CUSTOMREQUEST => "POST",
-  CURLOPT_POSTFIELDS => "api_key=$uprapi&format=json&id=".$uprid,
+  CURLOPT_POSTFIELDS => "api_key=$uprapi&format=json&id=".$uprid."&type=1&url=https%3A%2F%2F".$site.".herokuapp.com%2Findex.php%3Fid=".($_GET['id']+0)."&friendly_name=id".($_GET['id']+0),
   CURLOPT_HTTPHEADER => array("cache-control: no-cache","content-type: application/x-www-form-urlencoded"),
 ));
 $response = curl_exec($curl);$err = curl_error($curl);curl_close($curl);
