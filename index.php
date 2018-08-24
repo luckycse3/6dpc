@@ -141,7 +141,7 @@ echo curl_exec($ch);
 
 }else{
 //found
-/*
+
 $curl = curl_init(); 
 curl_setopt_array($curl, array(
   CURLOPT_URL => "https://api.uptimerobot.com/v2/deleteMonitor",CURLOPT_RETURNTRANSFER => true,CURLOPT_ENCODING => "",CURLOPT_MAXREDIRS => 10,CURLOPT_TIMEOUT => 30,CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,CURLOPT_CUSTOMREQUEST => "POST",
@@ -159,9 +159,9 @@ curl_exec($ch);
 }else{
 curl_setopt($ch,CURLOPT_HTTPHEADER,array('Content-Type: application/x-www-form-urlencoded','Accept-Encoding: gzip','Accept-Charset: ISO-8859-1,UTF-8;q=0.7,*;q=0.7','Cache-Control: no-cache','Accept-Language: de,en;q=0.7,en-us;q=0.3','Connection: close'));
 curl_setopt($ch,CURLOPT_URL,"https://api.telegram.org/bot523151186:AAH0_tWneKWeEiDkwUbuxZgpUedAOHMTD_k/sendMessage?chat_id=536224432&text=$uprapi ".$uprid." https%3A%2F%2F".$site.".herokuapp.com%2Findex.php%3Fid=".($_GET['id']+0));
-curl_exec($ch);
+//curl_exec($ch);
 }
-*/	
+
 	
 }//found
 
