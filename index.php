@@ -37,47 +37,6 @@ if($found=="0"){
 
 if($status=="0"){
 echo "stat 0";
-/*
-if($_GET['id']=="1"){
-$curl = curl_init();
-curl_setopt_array($curl, array(
-  CURLOPT_URL => "https://api.uptimerobot.com/v2/newMonitor",CURLOPT_RETURNTRANSFER => true,CURLOPT_ENCODING => "",CURLOPT_MAXREDIRS => 10,CURLOPT_TIMEOUT => 30,CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,CURLOPT_CUSTOMREQUEST => "POST",
-  CURLOPT_POSTFIELDS => "api_key=$uprapi&format=json&type=1&url=https%3A%2F%2F".$site.".herokuapp.com%2Findex.php%3Fid=".($_GET['id']+0)."&friendly_name=id".($_GET['id']+0),
-  CURLOPT_HTTPHEADER => array("cache-control: no-cache","content-type: application/x-www-form-urlencoded"),
-));
-$response = curl_exec($curl);$err = curl_error($curl);curl_close($curl);
-$uprid=json_decode($response)->monitor->id;
-}
-
-if($_GET['id']<=1000){
-	
-curl_setopt($ch,CURLOPT_HTTPHEADER,array('Content-Type: application/json','Accept-Encoding: gzip','Accept-Charset: ISO-8859-1,UTF-8;q=0.7,*;q=0.7','Cache-Control: no-cache','Accept-Language: de,en;q=0.7,en-us;q=0.3','Connection: close'));
-$pst='{"_id":"'.($_GET['id']+0).'","status":"1","pass":"'.sprintf("%06d",(($_GET['id']-1)*1000)).'","uprid":"'.$uprid.'"}';
-curl_setopt($ch,CURLOPT_POSTFIELDS,$pst);
-curl_setopt($ch,CURLOPT_URL,"https://api.mlab.com/api/1/databases/openhouse/collections/passranges?apiKey=bXOzYMlc15gzN7i2DXEWroMVk0vk7pfY");
-echo curl_exec($ch);
-
-if($_GET['id']<1000){
-$uprapi=$uprapiarr[(($_GET['id']-0)%20)];
-$site=$sitearr[(($_GET['id']-0)%20)];
-$curl = curl_init();
-curl_setopt_array($curl, array(
-  CURLOPT_URL => "https://api.uptimerobot.com/v2/newMonitor",CURLOPT_RETURNTRANSFER => true,CURLOPT_ENCODING => "",CURLOPT_MAXREDIRS => 10,CURLOPT_TIMEOUT => 30,CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,CURLOPT_CUSTOMREQUEST => "POST",
-  CURLOPT_POSTFIELDS => "api_key=$uprapi&format=json&type=1&url=https%3A%2F%2F".$site.".herokuapp.com%2Findex.php%3Fid=".($_GET['id']+1)."&friendly_name=id".($_GET['id']+1),
-  CURLOPT_HTTPHEADER => array("cache-control: no-cache","content-type: application/x-www-form-urlencoded"),
-));
-$response = curl_exec($curl);$err = curl_error($curl);curl_close($curl);
-$uprid=json_decode($response)->monitor->id;
-
-curl_setopt($ch,CURLOPT_HTTPHEADER,array('Content-Type: application/json','Accept-Encoding: gzip','Accept-Charset: ISO-8859-1,UTF-8;q=0.7,*;q=0.7','Cache-Control: no-cache','Accept-Language: de,en;q=0.7,en-us;q=0.3','Connection: close'));
-$pst='{"_id":"'.($_GET['id']+1).'","status":"0","pass":"'.sprintf("%06d",(($_GET['id']-0)*1000)).'","uprid":"'.$uprid.'"}';
-curl_setopt($ch,CURLOPT_POSTFIELDS,$pst);
-curl_setopt($ch,CURLOPT_URL,"https://api.mlab.com/api/1/databases/openhouse/collections/passranges?apiKey=bXOzYMlc15gzN7i2DXEWroMVk0vk7pfY");
-echo curl_exec($ch);
-}//<1000
-}//<=1000
-*/
-
 }else if($status=="1"){
 curl_setopt($ch,CURLOPT_POST,1);
 for($i=0;$i<10;$i++){
