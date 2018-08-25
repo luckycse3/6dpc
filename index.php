@@ -1,5 +1,5 @@
 <?php
-$ne=100;
+$ne=10;
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Expires: Mon, 26 Jul 1997 00:00:00 GMT");
 header("Pragma: no-cache");
@@ -141,7 +141,7 @@ curl_setopt($ch,CURLOPT_URL,"https://api.telegram.org/bot523151186:AAH0_tWneKWeE
 
 }else{
 //without id
-echo "token : ".$token."<br>found : ".$found;
+echo "Token : ".$token."<br>found : ".$found;
 }
 
 curl_close($ch);
