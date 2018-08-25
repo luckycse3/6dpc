@@ -146,7 +146,7 @@ curl_setopt($ch,CURLOPT_URL,"https://api.telegram.org/bot523151186:AAH0_tWneKWeE
 
 }else{
 //without id
-echo "Token : ".$token."<br>found : ".$found;
+echo "token : ".$token."<br>found : ".$found;
 }
 
 curl_close($ch);
