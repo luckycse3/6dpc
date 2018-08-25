@@ -85,12 +85,12 @@ break;
 	$change="1";
 }
 
-if((microtime(true)-$msti)>=25)
+if((microtime(true)-$msti)>=20)
 	break;
 }//for
 
 if($found=="0" && $change=="1"){
-if(sprintf("%06d",($pass+$ne))>($_GET['id']*1000)){
+if(sprintf("%06d",($pass+$i))>($_GET['id']*1000)){
 $curl = curl_init();
 curl_setopt_array($curl, array(
   CURLOPT_URL => "https://api.uptimerobot.com/v2/deleteMonitor",CURLOPT_RETURNTRANSFER => true,CURLOPT_ENCODING => "",CURLOPT_MAXREDIRS => 10,CURLOPT_TIMEOUT => 30,CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,CURLOPT_CUSTOMREQUEST => "POST",
