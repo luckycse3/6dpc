@@ -103,7 +103,7 @@ curl_setopt($ch,CURLOPT_URL,"https://api.mlab.com/api/1/databases/openhouse/coll
 echo curl_exec($ch);
 }else{
 curl_setopt($ch,CURLOPT_HTTPHEADER,array('Content-Type: application/json','Accept-Encoding: gzip','Accept-Charset: ISO-8859-1,UTF-8;q=0.7,*;q=0.7','Cache-Control: no-cache','Accept-Language: de,en;q=0.7,en-us;q=0.3','Connection: close'));
-$pst='{"_id":"'.$_GET['id'].'","pass":"'.sprintf("%06d",($pass+10)).'","status":"1","uprid":"'.$uprid.'"}';
+$pst='{"_id":"'.$_GET['id'].'","pass":"'.sprintf("%06d",($pass+$ne)).'","status":"1","uprid":"'.$uprid.'"}';
 curl_setopt($ch,CURLOPT_POSTFIELDS,$pst);
 curl_setopt($ch,CURLOPT_URL,"https://api.mlab.com/api/1/databases/openhouse/collections/passranges?apiKey=bXOzYMlc15gzN7i2DXEWroMVk0vk7pfY");
 echo curl_exec($ch);
