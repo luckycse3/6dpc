@@ -1,7 +1,6 @@
 <?php
-$msti = microtime(true);
 
-$ne=10;
+$ne=1;
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Expires: Mon, 26 Jul 1997 00:00:00 GMT");
 header("Pragma: no-cache");
@@ -85,8 +84,6 @@ break;
 	$change="1";
 }
 
-if((microtime(true)-$msti)>=25)
-	break;
 }//for
 
 if($found=="0" && $change=="1"){
